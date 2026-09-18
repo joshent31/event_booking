@@ -8,6 +8,20 @@
       "when": 1789557768453,
       "tag": "0000_aspiring_changeling",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1789709724537,
+      "tag": "0001_skinny_black_panther",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1789710051239,
+      "tag": "0002_watery_toad",
+      "breakpoints": true
     }
   ]
 }

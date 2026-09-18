@@ -1,2 +1,6 @@
-import { sqliteTable, text, index } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, index, integer } from 'drizzle-orm/sqlite-core';
 export const records = sqliteTable('records', {id:text('id').primaryKey(),owner:text('owner').notNull(),kind:text('kind').notNull(),payload:text('payload').notNull(),created:text('created').notNull()},t=>[index('records_owner_kind').on(t.owner,t.kind)]);
+export const members=sqliteTable('members',{id:text('id').primaryKey(),email:text('email').notNull(),name:text('name').notNull(),role:text('role').notNull(),created:text('created').notNull()});
+export const business=sqliteTable('business',{id:text('id').primaryKey(),kind:text('kind').notNull(),owner:text('owner').notNull(),event:text('event').notNull().default(''),status:text('status').notNull(),payload:text('payload').notNull(),created:text('created').notNull(),updated:text('updated').notNull()},t=>[index('business_owner_kind').on(t.owner,t.kind),index('business_event_kind').on(t.event,t.kind)]);
+export const workspaceState=sqliteTable('workspace_state',{id:text('id').primaryKey(),revision:integer('revision').notNull().default(0),token:text('token').notNull().default('')});
+export const mobileTokens=sqliteTable('mobile_tokens',{hash:text('hash').primaryKey(),owner:text('owner').notNull(),expires:text('expires').notNull(),created:text('created').notNull()},t=>[index('mobile_tokens_owner').on(t.owner)]);

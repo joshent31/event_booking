@@ -1,0 +1,1 @@
+{"expo":{"name":"JOSH Events","slug":"josh-events","version":"0.2.0","scheme":"joshevents","orientation":"portrait","userInterfaceStyle":"light","ios":{"supportsTablet":true,"bundleIdentifier":"com.joshevents.booking","infoPlist":{"ITSAppUsesNonExemptEncryption":false}},"android":{"package":"com.joshevents.booking"},"plugins":["expo-secure-store"]}}

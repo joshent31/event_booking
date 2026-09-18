@@ -1,0 +1,5 @@
+import {actor,sameOrigin,apiError,hashToken} from '../../../lib/account';
+import {recordsDb} from '../../../db/records';
+import {BusinessError} from '../../../lib/business';
+// Issuance requires browser SIWC sign-in, never a previously issued mobile token.
+export async function POST(request:Request){try{sameOrigin(request);const a=await actor();const body:any=await request.json();if(body.action==='revoke'){await recordsDb().prepare('DELETE FROM mobile_tokens WHERE owner=?').bind(a.id).run();return Response.json({revoked:true});}if(body.action!=='create')throw new BusinessError('Invalid action.');const token=Array.from(crypto.getRandomValues(new Uint8Array(32))).map(n=>n.toString(16).padStart(2,'0')).join(''),now=new Date(),expires=new Date(now.getTime()+7*86400000).toISOString();await recordsDb().batch([recordsDb().prepare('DELETE FROM mobile_tokens WHERE owner=?').bind(a.id),recordsDb().prepare('INSERT INTO mobile_tokens(hash,owner,expires,created) VALUES (?,?,?,?)').bind(await hashToken(token),a.id,expires,now.toISOString())]);return Response.json({token,expires},{headers:{'Cache-Control':'no-store'}});}catch(e){return apiError(e)}}

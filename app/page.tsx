@@ -1,4 +1,4 @@
-import EventDesk from './event-desk';
+import Platform from './platform';
 import {requireChatGPTUser} from './chatgpt-auth';
 export const dynamic='force-dynamic';
-export default async function Home(){await requireChatGPTUser('/');return <EventDesk/>}
+export default async function Home(){await requireChatGPTUser('/');return <Platform/>}
